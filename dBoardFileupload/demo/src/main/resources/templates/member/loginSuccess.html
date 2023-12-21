@@ -1,0 +1,22 @@
+<!-- 타임리프설정 -->
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<title>로그인성공</title>
+</head>
+
+<body>
+	<h1>로그인성공페이지</h1>
+	<div><span th:text='${session[member].name}'></span>님로그인성공</div>
+	<a th:href="@{/board/getBoardList}">게시판 이동</a>
+	<input name="name" type="hidden" th:value="${session[member].name}" />
+	<a th:href="@{/member/mypage(name=${session[member].name})}">마이페이지</a>
+
+	<!-- <div><span th:text='_____________________ '></span>님로그인성공</div> -->
+
+	<hr />
+	<a th:href="@{logout}">로그아웃</a>
+</body>
+
+</html>

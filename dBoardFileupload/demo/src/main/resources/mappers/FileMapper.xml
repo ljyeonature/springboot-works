@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- *************************** dao interface 경로+이름 -->
+<mapper namespace="com.example.demo.dao.FileDAO">
+
+	<!-- ************************* BoardDAO에 메소드명이랑 동일 -->
+								<!-- 원래는 com.example.demo.domain.BoardVO-->
+	<insert id="insertFile" parameterType="FileVO">
+
+		INSERT INTO board_file
+				(
+					originFilename
+					,filename
+					,filepath
+				)
+		VALUES (
+        		#{originFilename}
+				, #{filename}
+				, #{filepath}
+		)
+	
+	</insert>
+
+	<select id="selectFile" parameterType="FileVO" resultType="FileVO">
+	
+		SELECT *
+		FROM board_file
+		WHERE fileId = #{fileId}
+
+	</select>
+    <!-- board2 테이블에 최근 seq 값을 검색 -->
+	<select id="selectId" resultType="long">
+	
+		SELECT fileId
+		FROM board_file
+		ORDER BY fileId DESC LIMIT 1
+
+	</select>
+
+	<update id="updateBoard" parameterType="FileVO">
+	
+		UPDATE board SET title=#{title}, writer=#{writer}, content=#{content}, regdate=now()
+		WHERE SEQ = #{seq}
+
+	</update>
+
+	<delete id="deleteBoard" parameterType="FileVO">
+	
+		DELETE FROM board WHERE SEQ = #{seq}
+
+	</delete>
+	
+
+</mapper>

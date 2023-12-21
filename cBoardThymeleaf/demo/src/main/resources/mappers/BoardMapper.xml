@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- *************************** dao interface 경로+이름 -->
+<mapper namespace="com.example.demo.dao.BoardDAO">
+
+	<!-- ************************* BoardDAO에 메소드명이랑 동일 -->
+								<!-- 원래는 com.example.demo.domain.BoardVO-->
+	<select id="getBoardList" resultType="BoardVO">
+	
+		SELECT *
+		FROM BOARD
+		ORDER BY SEQ DESC
+
+	</select>
+
+	<insert id="saveBoard" parameterType="BoardVO">
+
+		INSERT INTO board (title, writer, content, regdate, cnt) 
+		VALUES (#{title}, #{writer}, #{content}, NOW(), 0)
+	
+	</insert>
+
+	<select id="getBoard" resultType="BoardVO">
+	
+		SELECT *
+		FROM BOARD
+		WHERE SEQ = #{seq}
+
+	</select>
+
+	<update id="updateBoard" parameterType="BoardVO">
+	
+		UPDATE board SET title=#{title}, writer=#{writer}, content=#{content}, regdate=now()
+		WHERE SEQ = #{seq}
+
+	</update>
+
+	<delete id="deleteBoard" parameterType="BoardVO">
+	
+		DELETE FROM board WHERE SEQ = #{seq}
+
+	</delete>
+	
+
+</mapper>
